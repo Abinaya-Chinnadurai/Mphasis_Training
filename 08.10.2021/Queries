@@ -1,0 +1,74 @@
+1) Display the last occurrence of given char in a string 
+ex : 'sravani' find out the last occurrence of 'a' 
+
+SELECT CASE
+WHEN INSTR(REVERSE('ABINAYA'),'A')=0 THEN 0
+ELSE
+LENGTH('ABINAYA')-INSTR(REVERSE('ABINAYA'),'A')+1
+END LAST_OCCUR
+FROM DUAL;
+
+LAST_OCCUR
+----------
+         7
+
+2) Take full name and split into firstname and lastname 
+Ex : 'harsha reddy' display as 'harsha' 'reddy'
+ SELECT SUBSTR('ABINAYA CHINNADURAI',1,INSTR('ABINAYA CHINNADURAI',' '))FNAME,SUBSTR('ABINAYA CHINNADURAI',INSTR('ABINAYA CHINNADURAI',' ')+1,LENGTH('ABINAYA CHINNADURAI'))LNAME FROM DUAL;
+
+FNAME    LNAME
+-------- ------------
+ABINAYA   CHINNADURAI
+
+3) In word 'misissipi' count no.of i's 
+SELECT LENGTH('MISISIPPI')-LENGTH(REPLACE('MISISIPPI','I'))I_COUNT FROM DUAL;
+
+   I_COUNT
+----------
+         4
+
+4) count no.of words in the given name 'harsha vardhan reddy'
+SELECT LENGTH('I LIKE ICECREAM')-LENGTH(REPLACE('I LIKE ICECREAM',' '))+1 AS WORD_COUNT FROM DUAL;
+
+WORD_COUNT
+----------
+         3
+
+5) Add 3 years 5 months and 10 days to the today's date 
+ SELECT ADD_MONTHS( ADD_MONTHS(SYSDATE+10,5),3*12)ADDED_YR FROM DUAL;
+
+ADDED_YR
+---------
+18-MAR-25
+
+6) Display the first day of the current month 
+SELECT TO_CHAR((ADD_MONTHS(LAST_DAY(SYSDATE),-1)+1),'DAY')FIRST_DAY FROM DUAL;
+
+FIRST_DAY
+------------------------------------
+FRIDAY
+
+
+7) Display all fridays of current month.
+
+SELECT NEXT_DAY(ADD_MONTHS(LAST_DAY(SYSDATE),-1),'FRIDAY')FIRST_FRI,
+     NEXT_DAY(ADD_MONTHS(LAST_DAY(SYSDATE),-1)+7,'FRIDAY')SECOND_FRI,
+     NEXT_DAY(ADD_MONTHS(LAST_DAY(SYSDATE),-1)+14,'FRIDAY')THIRD_FRI,
+     NEXT_DAY(ADD_MONTHS(LAST_DAY(SYSDATE),-1)+21,'FRIDAY')FOURTH_FRI,
+     CASE
+     WHEN TO_CHAR((NEXT_DAY(ADD_MONTHS(LAST_DAY(SYSDATE),-1)+28,'FRIDAY')),'MM')= TO_CHAR(SYSDATE,'MM')
+     THEN NEXT_DAY(ADD_MONTHS(LAST_DAY(SYSDATE),-1)+28,'FRIDAY')
+     END FIFTH_FRI
+     FROM DUAL;
+
+
+
+
+
+
+
+
+
+
+
+
